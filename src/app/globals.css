@@ -206,53 +206,54 @@
   pointer-events: none;
 }
 
-/* Scroll reveals are armed only after JS installs the observer. SSR, failed
-   JS and unsupported browsers retain the complete, visible website. */
+/* Motion director: states only exist after JS has installed the shared
+   observer. Server rendering, failed JS and unsupported browsers stay visible. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] {
-    --reveal-rise: 68px;
-    --reveal-delay: 0ms;
+  [data-motion-state="pending"]:not([data-motion-role="image"]):not([data-motion-role="mask"]) {
+    opacity: 0.25;
   }
-
-  [data-reveal-delay="1"], [data-reveal="1"] { --reveal-delay: 110ms; }
-  [data-reveal-delay="2"] { --reveal-delay: 220ms; }
-
-  [data-reveal-state="pending"]:not([data-reveal="image"]) {
-    opacity: 0;
-    translate: 0 var(--reveal-rise);
+  [data-motion-role="mask"][data-motion-state="pending"] {
+    clip-path: inset(0 0 92% 0);
   }
+  [data-motion-clip] { overflow: clip; }
 
-  [data-reveal-state="visible"]:not([data-reveal="image"]) {
-    animation: scroll-reveal-rise 950ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
-  }
-
-  [data-reveal="image"][data-reveal-state="pending"],
-  [data-reveal-state="pending"] [data-reveal-image] { scale: 1.06; }
-
-  [data-reveal="image"][data-reveal-state="visible"],
-  [data-reveal-state="visible"] [data-reveal-image] {
-    animation: scroll-reveal-settle 950ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
-  }
-
-  @media (max-width: 767px) {
-    [data-reveal] { --reveal-rise: 38px; --reveal-delay: 0ms; }
+  /* Native scroll timelines run independently of the one-shot image settle.
+     Overscan covers both the drift and the reveal offset. No JS scroll loop.
+     Browsers without scroll timelines keep the full image choreography. */
+  @supports (animation-timeline: view()) {
+    [data-motion-timeline] { view-timeline: --architecture block; }
+    [data-motion-parallax] {
+      --drift: 20px;
+      scale: 1.12;
+      animation: architectural-drift linear both;
+      animation-duration: auto;
+      animation-timeline: --architecture;
+      transition: scale 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      animation-range: normal;
+    }
+    #projects .group:hover [data-motion-parallax] { scale: 1.176; }
+    @media (max-width: 767px) {
+      [data-motion-parallax] { --drift: 8px; scale: 1.08; }
+      #projects .group:hover [data-motion-parallax] { scale: 1.134; }
+    }
   }
 }
 
-@keyframes scroll-reveal-rise {
-  from { opacity: 0; translate: 0 var(--reveal-rise); }
-  to { opacity: 1; translate: 0 0; }
+@keyframes architectural-drift {
+  from { translate: 0 calc(-1 * min(var(--drift), 3%)); }
+  to { translate: 0 min(var(--drift), 3%); }
 }
 
-/* Independent scale preserves the approved image hover transforms. */
-@keyframes scroll-reveal-settle {
-  from { scale: 1.06; }
-  to { scale: 1; }
-}
-
-@media print {
-  [data-reveal] { opacity: 1 !important; translate: none !important; animation: none !important; }
-  [data-reveal-image] { animation: none !important; }
+/* Also handle preference changes before the JS change event is dispatched. */
+@media (prefers-reduced-motion: reduce), print {
+  [data-motion-role], [data-motion-parallax] {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    scale: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
 }
 
 /* Mobile menu open/close choreography (panel is inert when closed). */

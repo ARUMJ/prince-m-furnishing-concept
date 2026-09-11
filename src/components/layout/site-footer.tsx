@@ -18,7 +18,7 @@ export function SiteFooter() {
     <footer className="border-t border-hairline bg-surface">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-20">
         {/* Brand */}
-        <div data-reveal="" className="lg:col-span-5">
+        <div className="lg:col-span-5">
           <BrandLogo size="md" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
             {business.legalName} supplies plywood and accessories, constructs
@@ -37,7 +37,7 @@ export function SiteFooter() {
         </div>
 
         {/* Services */}
-        <div data-reveal="" className="lg:col-span-3">
+        <div className="lg:col-span-3">
           <p className="eyebrow">Services</p>
           <ul className="mt-5 space-y-3">
             {business.services.map((service) => (
@@ -54,7 +54,7 @@ export function SiteFooter() {
         </div>
 
         {/* Navigation */}
-        <div data-reveal="" className="lg:col-span-2">
+        <div className="lg:col-span-2">
           <p className="eyebrow">Explore</p>
           <ul className="mt-5 space-y-3">
             {primaryNav.map((item) => (
@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
 
         {/* CTA */}
-        <div data-reveal="" className="lg:col-span-2">
+        <div className="lg:col-span-2">
           <p className="eyebrow">Enquiries</p>
           <a
             href={whatsappUrl(
@@ -88,7 +88,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-hairline">
-        <div data-reveal="" className="container-site flex flex-col gap-2 py-6 text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-site flex flex-col gap-2 py-6 text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {business.legalName}. All rights reserved.
           </p>

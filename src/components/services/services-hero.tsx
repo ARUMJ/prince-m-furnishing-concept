@@ -12,7 +12,7 @@ export function ServicesHero() {
       className="border-b border-hairline bg-surface/30"
     >
       <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-12 lg:gap-16 lg:py-24">
-        <div data-reveal="" className="lg:col-span-7">
+        <div className="lg:col-span-7">
           <p className="eyebrow flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-12 bg-accent" />
             {servicesPage.eyebrow}
@@ -33,7 +33,7 @@ export function ServicesHero() {
           </p>
         </div>
 
-        <nav aria-label="Services index" data-reveal="1" className="lg:col-span-5 lg:self-end">
+        <nav aria-label="Services index" className="lg:col-span-5 lg:self-end">
           <ol className="border-t border-hairline">
             {services.map((service) => (
               <li key={service.id}>

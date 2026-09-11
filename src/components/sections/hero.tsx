@@ -25,7 +25,6 @@ export function Hero() {
           fill
           sizes="100vw"
           preload
-          data-reveal="image"
           className="object-cover"
         />
         {/* Legability layers: left-weighted scrim + bottom + top fades. */}
@@ -40,7 +39,7 @@ export function Hero() {
       </div>
 
       <div className="container-site relative z-10 w-full pb-16 pt-24 sm:pb-24 sm:pt-28 lg:py-32">
-        <div data-reveal="" className="max-w-3xl">
+        <div className="max-w-3xl">
           <p className="eyebrow flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-12 bg-accent" />
             {hero.eyebrow}

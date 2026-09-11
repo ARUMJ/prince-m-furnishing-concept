@@ -25,7 +25,6 @@ export function FinalCta() {
           height={900}
           fill
           sizes="100vw"
-          data-reveal="image"
           className="object-cover"
         />
         <div
@@ -38,7 +37,7 @@ export function FinalCta() {
         />
       </div>
 
-      <div data-reveal="" className="container-site py-24 text-center sm:py-32 lg:py-40">
+      <div className="container-site py-24 text-center sm:py-32 lg:py-40">
         <p className="eyebrow flex items-center justify-center gap-3">
           <span aria-hidden="true" className="inline-block h-px w-8 bg-accent/70" />
           {finalCta.eyebrow}

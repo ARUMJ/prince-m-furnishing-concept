@@ -20,7 +20,7 @@ export function FeaturedWork() {
       className="section-block"
     >
       <div className="container-site">
-        <div data-reveal="" className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             eyebrow="Featured Work"
             title="Spaces & Possibilities."
@@ -35,12 +35,9 @@ export function FeaturedWork() {
           {featuredWork.map((tile, index) => (
             <li
               key={tile.id}
-              data-reveal=""
-              data-reveal-delay={index % 3}
               className={`group relative h-72 overflow-hidden bg-surface-raised sm:h-64 lg:h-full ${tile.placement}`}
             >
               <Image
-                data-reveal-image=""
                 src={tile.image.src}
                 alt={tile.image.alt}
                 width={tile.image.width}
@@ -76,7 +73,7 @@ export function FeaturedWork() {
           photography will replace them before launch.
         </p>
 
-        <div data-reveal="" className="mt-10 flex justify-center lg:mt-12">
+        <div className="mt-10 flex justify-center lg:mt-12">
           <a
             href={featuredWhatsappHref}
             target="_blank"

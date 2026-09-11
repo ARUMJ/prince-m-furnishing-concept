@@ -23,7 +23,7 @@ export function Services() {
       className="section-block border-t border-hairline bg-surface/40"
     >
       <div className="container-site">
-        <div data-reveal="" className="max-w-3xl">
+        <div className="max-w-3xl">
           <p className="eyebrow flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-12 bg-accent" />
             {servicesShowcase.eyebrow}
@@ -35,11 +35,10 @@ export function Services() {
         </div>
 
         <ol className="mt-12 grid gap-px border border-hairline/70 bg-hairline/70 sm:mt-14 md:grid-cols-3">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <li key={service.id} className="group relative flex flex-col bg-surface">
-              <div data-reveal="" data-reveal-delay={index} className="relative overflow-hidden">
+              <div className="relative overflow-hidden">
                 <Image
-                  data-reveal-image=""
                   src={service.image.src}
                   alt={service.image.alt}
                   width={service.image.width}
@@ -60,7 +59,7 @@ export function Services() {
                 </p>
               </div>
 
-              <div data-reveal="" data-reveal-delay={index} className="flex flex-1 flex-col p-6 pt-4 sm:p-7 sm:pt-5">
+              <div className="flex flex-1 flex-col p-6 pt-4 sm:p-7 sm:pt-5">
                 <h3 className="font-display text-[1.6rem] leading-[1.15] text-bone-50 transition-colors duration-300 group-hover:text-accent-strong">
                   <Link
                     href={`/services#${service.id}`}
@@ -100,7 +99,7 @@ export function Services() {
         </ol>
 
         {/* Conversion band — sized to matter, bordered to belong. */}
-        <div data-reveal="" className="mt-10 flex flex-col gap-7 border border-hairline/70 bg-surface-raised/25 px-6 py-8 sm:px-10 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-7 border border-hairline/70 bg-surface-raised/25 px-6 py-8 sm:px-10 md:flex-row md:items-center md:justify-between">
           <div>
             <h3 className="font-display text-2xl text-bone-50">{servicesShowcase.cta.heading}</h3>
             <p className="mt-2 max-w-md text-sm text-muted">{servicesShowcase.cta.copy}</p>
