@@ -48,7 +48,7 @@ export const heroImage = {
 } as const;
 
 export const brandIntro = {
-  eyebrow: "The Company",
+  eyebrow: "01 / The Company",
   heading: "Designed for Living. Built to Last.",
   paragraphs: [
     "Prince M Furnishing Concept Ltd works across the full journey of a fitted interior — from the raw boards your surfaces are made of to the finished room you live in.",
@@ -63,85 +63,6 @@ export const brandIntroImage = {
   width: 1200,
   height: 800,
 } as const;
-
-export type ServiceEntry = {
-  readonly id: string;
-  readonly index: string;
-  readonly title: string;
-  readonly description: string;
-  readonly points: readonly string[];
-  readonly image: {
-    readonly src: string;
-    readonly alt: string;
-    readonly width: number;
-    readonly height: number;
-  };
-  readonly whatsappMessage: string;
-};
-
-/** Exactly the three approved service lines — no invented extras. */
-export const services: readonly ServiceEntry[] = [
-  {
-    id: "plywood-and-accessories",
-    index: "01",
-    title: "Plywood & Accessories",
-    description:
-      "A curated stock of plywood and the accessories that finish it — boards selected for grade and figure, matched with edges, hardware and fittings that do justice to them.",
-    points: [
-      "Marine, first-grade and decorative plywood stock",
-      "Edges, laminates and surface finishing materials",
-      "Hinges, handles, slides and mounting hardware",
-    ],
-    image: {
-      src: "/images/services/plywood-accessories.jpg",
-      alt: "Illustrative render of a stack of premium plywood sheets with clean veneer edges under warm showroom lighting.",
-      width: 1000,
-      height: 1250,
-    },
-    whatsappMessage:
-      "Hello Prince M Furnishing Concept, I would like to ask about plywood and accessories.",
-  },
-  {
-    id: "furniture-construction",
-    index: "02",
-    title: "Furniture Construction",
-    description:
-      "Made-to-measure furniture built around the room it belongs to — wardrobes, sideboards, TV consoles, beds and office furniture dimensioned, joined and finished to last.",
-    points: [
-      "Wardrobes, bed frames and sideboards",
-      "TV consoles, shelving and storage walls",
-      "Office and commercial furniture builds",
-    ],
-    image: {
-      src: "/images/services/furniture-construction.jpg",
-      alt: "Illustrative render of a nearly finished walnut sideboard with brass handles on a workshop bench under warm task light.",
-      width: 1400,
-      height: 933,
-    },
-    whatsappMessage:
-      "Hello Prince M Furnishing Concept, I would like to discuss custom furniture construction.",
-  },
-  {
-    id: "interior-design",
-    index: "03",
-    title: "Interior Design",
-    description:
-      "Spaces planned with intent — layout, material palette, lighting and detailing drawn together into one coherent design, then realised with the joinery we build ourselves.",
-    points: [
-      "Residential and commercial interiors",
-      "Space planning and material palettes",
-      "Custom joinery designed as part of the scheme",
-    ],
-    image: {
-      src: "/images/services/interior-design.jpg",
-      alt: "Illustrative render of a refined reading corner with black panelling, an ivory chair and a warm brass wall light.",
-      width: 1000,
-      height: 1250,
-    },
-    whatsappMessage:
-      "Hello Prince M Furnishing Concept, I would like to discuss an interior design project.",
-  },
-];
 
 export const visualStatement = {
   eyebrow: "The Studio View",

@@ -44,6 +44,7 @@ src/
   app/
     layout.tsx        Root layout: fonts, metadata, landmarks, JSON-LD
     page.tsx          Phase 1 homepage (section composition)
+    services/         Services page (editorial chapter system)
     globals.css       Design tokens + base styles + primitives + motion
     not-found.tsx     404 page
     error.tsx         Error boundary (client component)
@@ -56,11 +57,15 @@ src/
     layout/           SiteHeader, SiteFooter, MobileNav, BrandLogo
     sections/         Hero, BrandIntro, Services, VisualStatement,
                       FeaturedWork, WhyChoosePrinceM, FinalCta
+    services/         ServicesHero, ServiceChapter (alternating editorial
+                      chapter grid shared by the /services page)
     shared/           JsonLd renderer, SectionHeading
     ui/               Button/ButtonLink primitives, inline icons
   data/
     business.ts       Verified business facts + services (single source of truth)
     homepage.ts       Typed homepage content (nav, sections, gallery, values)
+    services.ts       Canonical service content shared by the homepage
+                      showcase and the /services page
   fonts/              Self-hosted Inter and Playfair Display + OFL licences
   lib/
     seo/              config.ts, metadata.ts, schema.ts
@@ -172,9 +177,10 @@ whatsappUrl("Hello, I would like a quote."); // https://wa.me/2348073161010?text
 WHATSAPP_DISPLAY_NUMBER;                      // 08073161010
 ```
 
-The number is declared once and nowhere else. The header, hero, service rows,
-featured-work CTA, final CTA and footer all build their links through
-`whatsappUrl()` — service CTAs are seeded with a service-specific message.
+The number is declared once and nowhere else. The header, hero, capability
+columns, services chapters, featured-work CTA, final CTA and footer all build
+their links through `whatsappUrl()` — service CTAs are seeded with a
+service-specific message.
 
 ## Accessibility foundation
 

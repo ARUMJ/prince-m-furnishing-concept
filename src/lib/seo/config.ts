@@ -105,6 +105,7 @@ export type SiteRoute = {
  */
 export const siteRoutes: readonly SiteRoute[] = [
   { path: "/", changeFrequency: "monthly", priority: 1 },
+  { path: "/services", changeFrequency: "monthly", priority: 0.9 },
 ];
 
 /** Resolve an origin-relative path against the configured site URL. */

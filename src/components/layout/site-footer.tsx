@@ -43,7 +43,7 @@ export function SiteFooter() {
             {business.services.map((service) => (
               <li key={service.id}>
                 <Link
-                  href="/#services"
+                  href="/services"
                   className="text-sm text-muted transition-colors duration-200 hover:text-accent"
                 >
                   {service.label.replace(/^\w/, (c) => c.toUpperCase())}

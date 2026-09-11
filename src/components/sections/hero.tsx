@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowDownIcon, WhatsAppIcon } from "@/components/ui/icons";
-import { hero, heroImage, heroWhatsappHref, services } from "@/data/homepage";
+import { hero, heroImage, heroWhatsappHref } from "@/data/homepage";
+import { services } from "@/data/services";
 
 /**
  * Cinematic hero. The only preloaded (LCP) image on the page; the slow
@@ -69,7 +70,7 @@ export function Hero() {
               Chat on WhatsApp
             </a>
             <Link
-              href="/#services"
+              href="/services"
               className="inline-flex h-13 items-center gap-3 rounded-sm border border-bone-300/35 px-8 text-sm font-medium uppercase tracking-[0.16em] text-bone-100 transition-colors duration-200 hover:border-accent hover:text-accent"
             >
               Explore Our Services
