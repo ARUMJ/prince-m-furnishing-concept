@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { JsonLd } from "@/components/shared/json-ld";
-import { siteConfig, siteUrl } from "@/lib/seo/config";
+import { siteConfig, siteOrigin } from "@/lib/seo/config";
 import { defaultMetadata } from "@/lib/seo/metadata";
 import { localBusinessSchema } from "@/lib/seo/schema";
 
@@ -35,7 +35,7 @@ const playfairDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteOrigin,
   ...defaultMetadata,
   title: siteConfig.title,
   applicationName: siteConfig.name,

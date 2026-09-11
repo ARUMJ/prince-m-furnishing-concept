@@ -129,12 +129,15 @@ cp .env.example .env.local
 
 | Variable               | Purpose                                                          |
 | ---------------------- | ---------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Absolute origin, no trailing slash. Drives `metadataBase`, canonical URLs, robots.txt and sitemap.xml. |
+| `NEXT_PUBLIC_SITE_URL` | Absolute origin, no trailing slash. Drives `metadataBase`, canonical URLs, robots.txt and sitemap.xml. **Set this in Vercel → Project Settings → Environment Variables (Production)** for the live domain. |
 
-While it is **unset** the site is treated as a development preview: robots are
-disallowed and every page is `noindex, nofollow`, so a staging deployment can
-never be indexed by accident. Set it in the Vercel project settings for
-production.
+While this variable is **unset, empty or invalid** the site is treated as a
+development preview: robots are disallowed and every page is `noindex,
+nofollow`, so a staging deployment can never be indexed by accident. On Vercel
+the fallback origin is the auto-injected deployment URL (`VERCEL_PROJECT_PRODUCTION_URL`
+/ `VERCEL_URL`) so canonical and OG URLs stay meaningful; builds can therefore
+never fail on an empty value, and a blank environment variable never enables
+indexing.
 
 ## Assets
 
