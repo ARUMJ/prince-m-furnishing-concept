@@ -35,6 +35,12 @@ export const siteConfig = {
    * business confirms a regional variant such as "en_NG".
    */
   locale: "en",
+  /**
+   * Default 1200×630 social share card, used by buildMetadata for every
+   * page unless overridden. Concept art direction, not project photography
+   * — replace alongside the temporary imagery.
+   */
+  shareImage: "/images/general/og-share.jpg",
 } as const;
 
 export type SiteRoute = {

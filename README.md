@@ -3,9 +3,14 @@
 Production website for **Prince M Furnishing Concept Ltd**, covering plywood and
 accessories sales, furniture construction and interior design.
 
-**Status: Phase 0 — technical and design foundation.** The homepage, services,
-projects and contact pages are delivered in later phases. Nothing on the site is
-placeholder marketing copy, and no business detail has been invented.
+**Status: Phase 1 — premium homepage.** The homepage (hero, brand
+introduction, services, visual statement, featured work, values, CTA) and the
+shared visual system are in place. About/Services/Projects/Contact navigation
+temporarily anchors to homepage sections until their pages ship in later
+phases. All interior imagery is temporary AI-rendered art direction and is
+explicitly labelled as illustrative — it must be replaced with client
+photography before launch. Nothing on the site is placeholder marketing
+claims, and no business detail has been invented.
 
 ---
 
@@ -38,8 +43,8 @@ npm run typecheck # tsc --noEmit
 src/
   app/
     layout.tsx        Root layout: fonts, metadata, landmarks, JSON-LD
-    page.tsx          Phase 0 homepage placeholder
-    globals.css       Design tokens + base styles + primitives
+    page.tsx          Phase 1 homepage (section composition)
+    globals.css       Design tokens + base styles + primitives + motion
     not-found.tsx     404 page
     error.tsx         Error boundary (client component)
     loading.tsx       Instant loading state
@@ -47,11 +52,14 @@ src/
     sitemap.ts        Generated sitemap.xml
     favicon.ico       Temporary favicon — replaced with the official logo in Phase 1
   components/
-    layout/           SiteHeader, SiteFooter shells
-    shared/           JsonLd renderer
-    ui/               Button, ButtonLink primitives
+    layout/           SiteHeader, SiteFooter, MobileNav, BrandLogo
+    sections/         Hero, BrandIntro, Services, VisualStatement,
+                      FeaturedWork, WhyChoosePrinceM, FinalCta
+    shared/           JsonLd renderer, SectionHeading
+    ui/               Button/ButtonLink primitives, inline icons
   data/
     business.ts       Verified business facts + services (single source of truth)
+    homepage.ts       Typed homepage content (nav, sections, gallery, values)
   fonts/              Self-hosted Inter and Playfair Display + OFL licences
   lib/
     seo/              config.ts, metadata.ts, schema.ts
@@ -156,9 +164,9 @@ whatsappUrl("Hello, I would like a quote."); // https://wa.me/2348073161010?text
 WHATSAPP_DISPLAY_NUMBER;                      // 08073161010
 ```
 
-The number is declared once and nowhere else. Header, hero, contact, floating
-button and quote CTAs must all build their links through `whatsappUrl()`; those
-UI elements are Phase 1 work.
+The number is declared once and nowhere else. The header, hero, service rows,
+featured-work CTA, final CTA and footer all build their links through
+`whatsappUrl()` — service CTAs are seeded with a service-specific message.
 
 ## Accessibility foundation
 
@@ -183,8 +191,8 @@ UI elements are Phase 1 work.
 
 | Phase | Scope                                                                  |
 | ----- | ---------------------------------------------------------------------- |
-| 0     | Technical + design foundation (this commit)                             |
-| 1     | Logo selection, premium visual design, homepage                         |
+| 0     | Technical + design foundation                                           |
+| 1     | Logo selection, premium visual design, homepage (this branch)           |
 | 2     | About, Services and individual service pages, Contact                   |
 | 3     | Projects, gallery, product catalogue                                    |
 | 4     | Quote/request system, blog and SEO content                              |

@@ -56,6 +56,8 @@
   /* --- Fluid type scale ------------------------------------------------ */
   --text-display: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
   --text-display--line-height: 1.05;
+  --text-hero: clamp(2.6rem, 1.7rem + 4.8vw, 5.75rem);
+  --text-hero--line-height: 1.03;
   --text-title: clamp(2rem, 1.5rem + 2vw, 3rem);
   --text-title--line-height: 1.15;
   --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
@@ -148,8 +150,137 @@
 }
 
 /* ==========================================================================
-   Reusable primitives
+   Motion & interaction primitives (all CSS, no JavaScript)
    ========================================================================== */
+
+/* Animated gold underline for nav and inline links. */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Oversized serif numerals drawn as an outline; fill toward gold on row hover. */
+.numeral-outline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--color-gold-500) 45%, transparent);
+  transition: -webkit-text-stroke-color 0.5s ease;
+}
+
+.service-row:hover .numeral-outline,
+.value-row:hover .numeral-outline {
+  -webkit-text-stroke-color: var(--color-gold-300);
+}
+
+/* Hairline gold frame offset behind a feature image. */
+.frame-offset {
+  position: relative;
+}
+
+.frame-offset::before {
+  content: "";
+  position: absolute;
+  inset: 1.1rem -1.1rem -1.1rem 1.1rem;
+  border: 1px solid color-mix(in oklab, var(--color-gold-500) 38%, transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Slow cinematic drift on hero/statement imagery. */
+@media (prefers-reduced-motion: no-preference) {
+  .kenburns {
+    animation: kenburns-zoom 26s ease-out forwards;
+  }
+}
+
+@keyframes kenburns-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+/* Scroll-driven reveals — progressive enhancement only. Browsers without
+   scroll-linked animations (or with reduced motion) show content normally. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile menu open/close choreography (panel is inert when closed). */
+.mobile-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0s linear 0.28s;
+}
+
+.mobile-menu[data-state="open"] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-menu[data-state="open"] .menu-item {
+    animation: menu-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(90ms + var(--menu-index, 0) * 70ms);
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 @layer components {
   /* Single horizontal rhythm for every page section. */
@@ -169,5 +300,15 @@
   /* Small uppercase gold label used above section headings. */
   .eyebrow {
     @apply text-xs font-medium uppercase tracking-[0.28em] text-accent;
+  }
+
+  /* Consistent vertical rhythm for every homepage section. */
+  .section-block {
+    @apply py-20 sm:py-28 lg:py-36;
+  }
+
+  /* Keep anchored sections clear of the sticky header. */
+  section[id] {
+    scroll-margin-top: 5.5rem;
   }
 }

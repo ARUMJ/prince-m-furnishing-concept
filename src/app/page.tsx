@@ -1,19 +1,26 @@
-import { business } from "@/data/business";
+import { BrandIntro } from "@/components/sections/brand-intro";
+import { FeaturedWork } from "@/components/sections/featured-work";
+import { FinalCta } from "@/components/sections/final-cta";
+import { Hero } from "@/components/sections/hero";
+import { Services } from "@/components/sections/services";
+import { VisualStatement } from "@/components/sections/visual-statement";
+import { WhyChoosePrinceM } from "@/components/sections/why-choose";
 
 /**
- * Phase 0 placeholder. The production homepage — hero, services, projects,
- * contact — is delivered in Phase 1.
+ * Phase 1 homepage — a single premium landing narrative. Sections anchor to
+ * the header navigation (#about, #services, #projects, #contact) until
+ * their dedicated pages arrive in later phases.
  */
 export default function HomePage() {
   return (
-    <section className="container-site flex flex-col items-center gap-6 py-24 text-center sm:py-32">
-      <p className="eyebrow">Phase 0 — technical foundation</p>
-      <h1>{business.legalName}</h1>
-      <p className="max-w-xl text-lead text-muted">
-        The production homepage arrives in Phase 1. This placeholder confirms
-        that the design tokens, typography, SEO and accessibility foundations
-        are in place and building cleanly.
-      </p>
-    </section>
+    <>
+      <Hero />
+      <BrandIntro />
+      <Services />
+      <VisualStatement />
+      <FeaturedWork />
+      <WhyChoosePrinceM />
+      <FinalCta />
+    </>
   );
 }
