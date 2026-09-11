@@ -23,7 +23,7 @@ export function MobileNav({
 }: {
   items: readonly NavItem[];
   whatsappHref: string;
-  /** Brand slot rendered at the top of the open panel. */
+  /** Official brand lockup rendered at the top of the open panel. */
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);

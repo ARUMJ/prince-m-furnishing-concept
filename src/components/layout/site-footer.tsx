@@ -19,7 +19,7 @@ export function SiteFooter() {
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-20">
         {/* Brand */}
         <div className="lg:col-span-5">
-          <BrandLogo withTagline />
+          <BrandLogo size="md" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
             {business.legalName} supplies plywood and accessories, constructs
             made-to-measure furniture and delivers interior design for

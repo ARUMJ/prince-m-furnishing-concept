@@ -50,7 +50,8 @@ src/
     loading.tsx       Instant loading state
     robots.ts         Generated robots.txt
     sitemap.ts        Generated sitemap.xml
-    favicon.ico       Temporary favicon — replaced with the official logo in Phase 1
+    favicon.ico       Official-logo icons: favicon.ico + icon.png + apple-icon.png
+                      (format conversions of the client seal — artwork untouched)
   components/
     layout/           SiteHeader, SiteFooter, MobileNav, BrandLogo
     sections/         Hero, BrandIntro, Services, VisualStatement,
@@ -139,16 +140,20 @@ production.
 
 Photography lives in `public/images/`, organised by purpose:
 
-- `brand/` — the three official logo variations and derived favicons
+- `brand/` — the three official logo variations (kept byte-for-byte as
+  `prince1..3.jpeg`) plus web-optimised derivatives (format/size only)
 - `services/` — imagery for each service line
-- `projects/` — completed project photography
+- `projects/` — completed project photography (currently illustrative renders)
 - `general/` — textures, backgrounds, social share cards
 
-**The logo is never redesigned, regenerated or re-proportioned.** The client
-supplies three official variations; Phase 1 selects the one that works best
-against the black/gold system and drops it into `brand/`. The current
-`src/app/favicon.ico` is the framework default and must be replaced with an
-export of the official mark.
+**The logo is never redesigned, regenerated, recoloured or re-proportioned.**
+Phase 1 selected `prince1.jpeg` (the gold medallion seal) as the primary mark
+— header, footer, mobile menu, favicon/app icons and JSON-LD `logo` all use
+it unaltered. `prince2.jpeg` (name lockup, native 326px export) is used only
+as the framed "Official company mark" card in the About section, at or below
+its native size, and is kept as the source for social avatars. `prince3.jpeg`
+(navy banner with slide decorations) is archived for future external/social
+cover use and deliberately not placed on the black/gold site chrome.
 
 All imagery is served through `next/image` with explicit dimensions, and every
 image gets meaningful `alt` text (`alt=""` only when purely decorative).

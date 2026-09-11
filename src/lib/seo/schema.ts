@@ -23,6 +23,8 @@ export function localBusinessSchema(): Record<string, unknown> {
     description: siteConfig.description,
     url: siteUrl,
     telephone: business.phone.international,
+    // The official client-supplied seal, served from public/images/brand/.
+    logo: `${siteUrl}/images/brand/logo-medallion.jpg`,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services",

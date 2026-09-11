@@ -12,6 +12,7 @@
 
 @theme {
   /* --- Palette: ink (black foundations) ------------------------------ */
+  --color-ink-1000: #000000;
   --color-ink-950: #050506;
   --color-ink-900: #0b0b0d;
   --color-ink-850: #101013;

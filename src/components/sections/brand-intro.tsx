@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { SectionHeading } from "@/components/shared/section-heading";
+import { brandLockup } from "@/data/brand";
 import { brandIntro, brandIntroImage } from "@/data/homepage";
 
 /**
@@ -29,6 +30,22 @@ export function BrandIntro() {
             <span aria-hidden="true" className="h-px w-10 bg-accent/70" />
             Plywood · Furniture · Interior Design
           </p>
+
+          {/* The official name lockup (prince2) at its native export size —
+              never upscaled — presented as the brand itself. */}
+          <figure className="mt-10 inline-block border border-hairline bg-ink-1000 px-8 pt-8 pb-2">
+            <Image
+              src={brandLockup.src}
+              alt={brandLockup.alt}
+              width={brandLockup.width}
+              height={brandLockup.height}
+              sizes="280px"
+              className="h-auto w-[240px] sm:w-[280px]"
+            />
+            <figcaption className="pt-3 text-[0.65rem] uppercase tracking-[0.24em] text-subtle">
+              Official company mark
+            </figcaption>
+          </figure>
         </div>
 
         <div className="frame-offset reveal order-1 lg:order-2">
