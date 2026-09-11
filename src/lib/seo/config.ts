@@ -46,13 +46,18 @@ function vercelOrigin(): URL | undefined {
   return validOrigin(`https://${host}`);
 }
 
-/** Absolute origin — always valid, never empty, never with a trailing slash. */
-export const siteUrl = (configuredOrigin ?? vercelOrigin() ?? new URL(DEFAULT_URL))
-  .toString()
-  .replace(/\/$/, "");
+/**
+ * The validated deployment origin object.
+ *
+ * Constructed exclusively from values that `validOrigin` has ALREADY parsed
+ * (or from `DEFAULT_URL`), so no code path can ever hand an empty or invalid
+ * string to `new URL()`. Use this directly for `metadataBase` — it can never
+ * throw, and the stringified form below is what every other consumer reads.
+ */
+export const siteOrigin = configuredOrigin ?? vercelOrigin() ?? new URL(DEFAULT_URL);
 
-/** Pre-parsed origin for `metadataBase`; construction can never throw. */
-export const siteOrigin = new URL(siteUrl);
+/** Absolute origin string — always valid, never empty, no trailing slash. */
+export const siteUrl = siteOrigin.toString().replace(/\/$/, "");
 
 /** True only when a valid origin has been explicitly configured. */
 export const isIndexable = configuredOrigin !== undefined;
