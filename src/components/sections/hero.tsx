@@ -6,9 +6,8 @@ import { hero, heroImage, heroWhatsappHref } from "@/data/homepage";
 import { services } from "@/data/services";
 
 /**
- * Cinematic hero. The only preloaded (LCP) image on the page; the slow
- * kenburns drift is pure CSS and is disabled by the global
- * prefers-reduced-motion rule in globals.css.
+ * Cinematic hero. The only preloaded (LCP) image on the page; its
+ * one-shot settle respects reduced motion and leaves native scrolling intact.
  */
 export function Hero() {
   return (
@@ -26,7 +25,8 @@ export function Hero() {
           fill
           sizes="100vw"
           preload
-          className="kenburns object-cover"
+          data-reveal="image"
+          className="object-cover"
         />
         {/* Legability layers: left-weighted scrim + bottom + top fades. */}
         <div
@@ -40,7 +40,7 @@ export function Hero() {
       </div>
 
       <div className="container-site relative z-10 w-full pb-16 pt-24 sm:pb-24 sm:pt-28 lg:py-32">
-        <div className="max-w-3xl">
+        <div data-reveal="" className="max-w-3xl">
           <p className="eyebrow flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-12 bg-accent" />
             {hero.eyebrow}

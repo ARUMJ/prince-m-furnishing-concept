@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { JsonLd } from "@/components/shared/json-ld";
 import { siteConfig, siteOrigin } from "@/lib/seo/config";
 import { defaultMetadata } from "@/lib/seo/metadata";
@@ -62,6 +63,7 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
+        <ScrollReveal />
         <JsonLd data={localBusinessSchema()} />
       </body>
     </html>

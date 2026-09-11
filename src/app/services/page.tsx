@@ -41,7 +41,7 @@ export default function ServicesPage() {
         aria-labelledby="services-closing-title"
         className="border-t border-hairline bg-surface/40"
       >
-        <div className="container-site flex flex-col items-start gap-8 py-16 sm:py-20 md:flex-row md:items-center md:justify-between">
+        <div data-reveal="" className="container-site flex flex-col items-start gap-8 py-16 sm:py-20 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 id="services-closing-title" className="font-display text-[clamp(1.7rem,1.3rem+1.8vw,2.6rem)] leading-tight text-bone-50">
               {servicesPage.closing.heading}

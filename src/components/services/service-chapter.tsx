@@ -36,7 +36,7 @@ export function ServiceChapter({
         last ? "" : "border-b"
       } border-hairline`}
     >
-      <header className={`lg:col-span-6 lg:row-start-1 ${textStart}`}>
+      <header data-reveal="" className={`lg:col-span-6 lg:row-start-1 ${textStart}`}>
         <p
           className={`flex items-center gap-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-subtle ${
             flip ? "lg:flex-row-reverse" : ""
@@ -64,9 +64,11 @@ export function ServiceChapter({
       </header>
 
       <figure
+        data-reveal=""
         className={`relative h-80 overflow-hidden bg-surface-raised sm:h-96 lg:col-span-5 lg:row-span-2 lg:row-start-1 lg:h-auto lg:min-h-[26rem] ${imageStart}`}
       >
         <Image
+          data-reveal-image=""
           src={service.image.src}
           alt={service.image.alt}
           fill
@@ -78,7 +80,7 @@ export function ServiceChapter({
         </figcaption>
       </figure>
 
-      <div className={`lg:col-span-6 lg:row-start-2 lg:mt-6 ${textStart}`}>
+      <div data-reveal="" className={`lg:col-span-6 lg:row-start-2 lg:mt-6 ${textStart}`}>
         <p className="max-w-xl leading-relaxed text-muted">{service.description}</p>
 
         <div className="mt-9 grid gap-x-10 gap-y-5 sm:grid-cols-2">

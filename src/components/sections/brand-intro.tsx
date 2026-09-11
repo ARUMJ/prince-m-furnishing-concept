@@ -16,7 +16,7 @@ export function BrandIntro() {
       className="section-block overflow-hidden"
     >
       <div className="container-site grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <div className="reveal order-2 lg:order-1">
+        <div data-reveal="" className="order-2 lg:order-1">
           <SectionHeading
             eyebrow={brandIntro.eyebrow}
             title={brandIntro.heading}
@@ -48,7 +48,7 @@ export function BrandIntro() {
           </figure>
         </div>
 
-        <div className="frame-offset reveal order-1 lg:order-2">
+        <div data-reveal="" className="frame-offset order-1 lg:order-2">
           <Image
             src={brandIntroImage.src}
             alt={brandIntroImage.alt}

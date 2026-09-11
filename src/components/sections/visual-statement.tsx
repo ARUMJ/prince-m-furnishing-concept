@@ -21,7 +21,8 @@ export function VisualStatement() {
           height={visualStatementImage.height}
           fill
           sizes="100vw"
-          className="kenburns object-cover"
+          data-reveal="image"
+          className="object-cover"
         />
         <div
           aria-hidden="true"
@@ -34,7 +35,7 @@ export function VisualStatement() {
       </div>
 
       <div className="container-site py-24 sm:py-28 lg:py-32">
-        <div className="mx-auto max-w-4xl text-center">
+        <div data-reveal="" className="mx-auto max-w-4xl text-center">
           <p className="eyebrow flex items-center justify-center gap-3">
             <span aria-hidden="true" className="inline-block h-px w-8 bg-accent/70" />
             {visualStatement.eyebrow}

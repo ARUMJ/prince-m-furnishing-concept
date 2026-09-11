@@ -14,7 +14,7 @@ export function WhyChoosePrinceM() {
     >
       <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
-          <div className="lg:sticky lg:top-28">
+          <div data-reveal="" className="lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="The Difference"
               title="Why Choose Prince M."
@@ -27,6 +27,7 @@ export function WhyChoosePrinceM() {
           {whyChooseUs.map((value) => (
             <li
               key={value.index}
+              data-reveal=""
               className="value-row grid grid-cols-[auto,1fr] gap-6 border-b border-hairline py-9 transition-colors duration-500 hover:bg-surface-raised/25 first:border-t sm:gap-10 sm:py-10"
             >
               <p aria-hidden="true" className="numeral-outline text-5xl leading-none sm:text-6xl">

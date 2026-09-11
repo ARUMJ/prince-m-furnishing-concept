@@ -151,7 +151,7 @@
 }
 
 /* ==========================================================================
-   Motion & interaction primitives (all CSS, no JavaScript)
+   Motion & interaction primitives
    ========================================================================== */
 
 /* Animated gold underline for nav and inline links. */
@@ -206,43 +206,53 @@
   pointer-events: none;
 }
 
-/* Slow cinematic drift on hero/statement imagery. */
+/* Scroll reveals are armed only after JS installs the observer. SSR, failed
+   JS and unsupported browsers retain the complete, visible website. */
 @media (prefers-reduced-motion: no-preference) {
-  .kenburns {
-    animation: kenburns-zoom 26s ease-out forwards;
+  [data-reveal] {
+    --reveal-rise: 42px;
+    --reveal-delay: 0ms;
   }
-}
 
-@keyframes kenburns-zoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.09);
-  }
-}
+  [data-reveal-delay="1"], [data-reveal="1"] { --reveal-delay: 80ms; }
+  [data-reveal-delay="2"] { --reveal-delay: 160ms; }
 
-/* Scroll-driven reveals — progressive enhancement only. Browsers without
-   scroll-linked animations (or with reduced motion) show content normally. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: reveal-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 28%;
-    }
-  }
-}
-
-@keyframes reveal-rise {
-  from {
+  [data-reveal-state="pending"]:not([data-reveal="image"]) {
     opacity: 0;
-    transform: translateY(26px);
+    translate: 0 var(--reveal-rise);
   }
-  to {
-    opacity: 1;
-    transform: none;
+
+  [data-reveal-state="visible"]:not([data-reveal="image"]) {
+    animation: scroll-reveal-rise 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
   }
+
+  [data-reveal="image"][data-reveal-state="pending"],
+  [data-reveal-state="pending"] [data-reveal-image] { scale: 1.035; }
+
+  [data-reveal="image"][data-reveal-state="visible"],
+  [data-reveal-state="visible"] [data-reveal-image] {
+    animation: scroll-reveal-settle 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
+  }
+
+  @media (max-width: 767px) {
+    [data-reveal] { --reveal-rise: 24px; --reveal-delay: 0ms; }
+  }
+}
+
+@keyframes scroll-reveal-rise {
+  from { opacity: 0; translate: 0 var(--reveal-rise); }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* Independent scale preserves the approved image hover transforms. */
+@keyframes scroll-reveal-settle {
+  from { scale: 1.035; }
+  to { scale: 1; }
+}
+
+@media print {
+  [data-reveal] { opacity: 1 !important; translate: none !important; animation: none !important; }
+  [data-reveal-image] { animation: none !important; }
 }
 
 /* Mobile menu open/close choreography (panel is inert when closed). */
