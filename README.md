@@ -3,9 +3,14 @@
 Production website for **Prince M Furnishing Concept Ltd**, covering plywood and
 accessories sales, furniture construction and interior design.
 
-**Status: Phase 0 — technical and design foundation.** The homepage, services,
-projects and contact pages are delivered in later phases. Nothing on the site is
-placeholder marketing copy, and no business detail has been invented.
+**Status: Phase 1 — premium homepage.** The homepage (hero, brand
+introduction, services, visual statement, featured work, values, CTA) and the
+shared visual system are in place. About/Services/Projects/Contact navigation
+temporarily anchors to homepage sections until their pages ship in later
+phases. All interior imagery is temporary AI-rendered art direction and is
+explicitly labelled as illustrative — it must be replaced with client
+photography before launch. Nothing on the site is placeholder marketing
+claims, and no business detail has been invented.
 
 ---
 
@@ -38,20 +43,29 @@ npm run typecheck # tsc --noEmit
 src/
   app/
     layout.tsx        Root layout: fonts, metadata, landmarks, JSON-LD
-    page.tsx          Phase 0 homepage placeholder
-    globals.css       Design tokens + base styles + primitives
+    page.tsx          Phase 1 homepage (section composition)
+    services/         Services page (editorial chapter system)
+    globals.css       Design tokens + base styles + primitives + motion
     not-found.tsx     404 page
     error.tsx         Error boundary (client component)
     loading.tsx       Instant loading state
     robots.ts         Generated robots.txt
     sitemap.ts        Generated sitemap.xml
-    favicon.ico       Temporary favicon — replaced with the official logo in Phase 1
+    favicon.ico       Official-logo icons: favicon.ico + icon.png + apple-icon.png
+                      (format conversions of the client seal — artwork untouched)
   components/
-    layout/           SiteHeader, SiteFooter shells
-    shared/           JsonLd renderer
-    ui/               Button, ButtonLink primitives
+    layout/           SiteHeader, SiteFooter, MobileNav, BrandLogo
+    sections/         Hero, BrandIntro, Services, VisualStatement,
+                      FeaturedWork, WhyChoosePrinceM, FinalCta
+    services/         ServicesHero, ServiceChapter (alternating editorial
+                      chapter grid shared by the /services page)
+    shared/           JsonLd renderer, SectionHeading
+    ui/               Button/ButtonLink primitives, inline icons
   data/
     business.ts       Verified business facts + services (single source of truth)
+    homepage.ts       Typed homepage content (nav, sections, gallery, values)
+    services.ts       Canonical service content shared by the homepage
+                      showcase and the /services page
   fonts/              Self-hosted Inter and Playfair Display + OFL licences
   lib/
     seo/              config.ts, metadata.ts, schema.ts
@@ -120,27 +134,34 @@ cp .env.example .env.local
 
 | Variable               | Purpose                                                          |
 | ---------------------- | ---------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Absolute origin, no trailing slash. Drives `metadataBase`, canonical URLs, robots.txt and sitemap.xml. |
+| `NEXT_PUBLIC_SITE_URL` | Absolute origin, no trailing slash. Drives `metadataBase`, canonical URLs, robots.txt and sitemap.xml. **Set this in Vercel → Project Settings → Environment Variables (Production)** for the live domain. |
 
-While it is **unset** the site is treated as a development preview: robots are
-disallowed and every page is `noindex, nofollow`, so a staging deployment can
-never be indexed by accident. Set it in the Vercel project settings for
-production.
+While this variable is **unset, empty or invalid** the site is treated as a
+development preview: robots are disallowed and every page is `noindex,
+nofollow`, so a staging deployment can never be indexed by accident. On Vercel
+the fallback origin is the auto-injected deployment URL (`VERCEL_PROJECT_PRODUCTION_URL`
+/ `VERCEL_URL`) so canonical and OG URLs stay meaningful; builds can therefore
+never fail on an empty value, and a blank environment variable never enables
+indexing.
 
 ## Assets
 
 Photography lives in `public/images/`, organised by purpose:
 
-- `brand/` — the three official logo variations and derived favicons
+- `brand/` — the three official logo variations (kept byte-for-byte as
+  `prince1..3.jpeg`) plus web-optimised derivatives (format/size only)
 - `services/` — imagery for each service line
-- `projects/` — completed project photography
+- `projects/` — completed project photography (currently illustrative renders)
 - `general/` — textures, backgrounds, social share cards
 
-**The logo is never redesigned, regenerated or re-proportioned.** The client
-supplies three official variations; Phase 1 selects the one that works best
-against the black/gold system and drops it into `brand/`. The current
-`src/app/favicon.ico` is the framework default and must be replaced with an
-export of the official mark.
+**The logo is never redesigned, regenerated, recoloured or re-proportioned.**
+Phase 1 selected `prince1.jpeg` (the gold medallion seal) as the primary mark
+— header, footer, mobile menu, favicon/app icons and JSON-LD `logo` all use
+it unaltered. `prince2.jpeg` (name lockup, native 326px export) is used only
+as the framed "Official company mark" card in the About section, at or below
+its native size, and is kept as the source for social avatars. `prince3.jpeg`
+(navy banner with slide decorations) is archived for future external/social
+cover use and deliberately not placed on the black/gold site chrome.
 
 All imagery is served through `next/image` with explicit dimensions, and every
 image gets meaningful `alt` text (`alt=""` only when purely decorative).
@@ -156,9 +177,10 @@ whatsappUrl("Hello, I would like a quote."); // https://wa.me/2348073161010?text
 WHATSAPP_DISPLAY_NUMBER;                      // 08073161010
 ```
 
-The number is declared once and nowhere else. Header, hero, contact, floating
-button and quote CTAs must all build their links through `whatsappUrl()`; those
-UI elements are Phase 1 work.
+The number is declared once and nowhere else. The header, hero, capability
+columns, services chapters, featured-work CTA, final CTA and footer all build
+their links through `whatsappUrl()` — service CTAs are seeded with a
+service-specific message.
 
 ## Accessibility foundation
 
@@ -183,8 +205,8 @@ UI elements are Phase 1 work.
 
 | Phase | Scope                                                                  |
 | ----- | ---------------------------------------------------------------------- |
-| 0     | Technical + design foundation (this commit)                             |
-| 1     | Logo selection, premium visual design, homepage                         |
+| 0     | Technical + design foundation                                           |
+| 1     | Logo selection, premium visual design, homepage (this branch)           |
 | 2     | About, Services and individual service pages, Contact                   |
 | 3     | Projects, gallery, product catalogue                                    |
 | 4     | Quote/request system, blog and SEO content                              |

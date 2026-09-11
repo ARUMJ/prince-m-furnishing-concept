@@ -15,7 +15,7 @@ type PageMetadataOptions = {
   type?: "website" | "article";
   /** Overrides the environment-derived indexing decision for a single page. */
   indexable?: boolean;
-  /** Origin-relative path to a real 1200×630 image, e.g. "/images/general/share.jpg". */
+  /** Origin-relative path to a real 1200×630 image. Defaults to the site share card. */
   image?: string;
 };
 
@@ -33,7 +33,7 @@ export function buildMetadata({
   path = "/",
   type = "website",
   indexable = isIndexable,
-  image,
+  image = siteConfig.shareImage,
 }: PageMetadataOptions = {}): Metadata {
   const socialTitle = title ? `${title} | ${siteConfig.name}` : undefined;
 
