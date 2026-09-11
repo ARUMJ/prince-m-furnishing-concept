@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   PRINCE M FURNISHING CONCEPT — design tokens
+
+   Black is the dominant foundation. Gold is a strategic accent only:
+   primary actions, hairlines, small highlights and important interactive
+   states. Components should consume the semantic aliases (background,
+   surface, foreground, muted, hairline, accent) rather than the raw
+   palette values, so the theme can be retuned in one place.
+   ========================================================================== */
+
+@theme {
+  /* --- Palette: ink (black foundations) ------------------------------ */
+  --color-ink-950: #050506;
+  --color-ink-900: #0b0b0d;
+  --color-ink-850: #101013;
+  --color-ink-800: #16161a;
+  --color-ink-700: #23232a;
+  --color-ink-600: #34343d;
+
+  /* --- Palette: bone (warm neutrals for text on black) ---------------- */
+  --color-bone-50: #faf8f5;
+  --color-bone-100: #f2efe9;
+  --color-bone-200: #e2ddd4;
+  --color-bone-300: #c4bdb1;
+  --color-bone-400: #9d968a;
+
+  /* --- Palette: gold (accent only) ----------------------------------- */
+  --color-gold-200: #f4e6bd;
+  --color-gold-300: #ecd79a;
+  --color-gold-400: #dfc272;
+  --color-gold-500: #c9a44c;
+  --color-gold-600: #a9853a;
+  --color-gold-700: #7f6329;
+
+  /* --- Semantic aliases ------------------------------------------------ */
+  --color-background: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-raised: var(--color-ink-800);
+  --color-foreground: var(--color-bone-100);
+  --color-muted: var(--color-bone-300);
+  --color-subtle: var(--color-bone-400);
+  --color-hairline: var(--color-ink-700);
+  --color-accent: var(--color-gold-500);
+  --color-accent-strong: var(--color-gold-300);
+  --color-accent-deep: var(--color-gold-700);
+  --color-on-accent: var(--color-ink-950);
+
+  /* --- Typography ------------------------------------------------------
+     --font-inter and --font-playfair are injected by next/font in
+     app/layout.tsx; both families are self-hosted at build time.       */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+
+  /* --- Fluid type scale ------------------------------------------------ */
+  --text-display: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-title: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-title--line-height: 1.15;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-display);
+    line-height: var(--text-display--line-height);
+  }
+
+  h2 {
+    font-size: var(--text-title);
+    line-height: var(--text-title--line-height);
+  }
+
+  h3 {
+    font-size: var(--text-lead);
+    font-weight: 600;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  /* Visible, consistent keyboard focus for every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* Honour users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Reusable primitives
+   ========================================================================== */
+
+@layer components {
+  /* Single horizontal rhythm for every page section. */
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Hidden until focused by keyboard. */
+  .skip-link {
+    @apply absolute -top-24 left-4 z-50 bg-accent px-4 py-2 text-sm font-semibold text-on-accent transition-[top] duration-200;
+  }
+
+  .skip-link:focus-visible {
+    @apply top-4;
+  }
+
+  /* Small uppercase gold label used above section headings. */
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.28em] text-accent;
+  }
+}
