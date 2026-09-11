@@ -210,12 +210,12 @@
    JS and unsupported browsers retain the complete, visible website. */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] {
-    --reveal-rise: 42px;
+    --reveal-rise: 68px;
     --reveal-delay: 0ms;
   }
 
-  [data-reveal-delay="1"], [data-reveal="1"] { --reveal-delay: 80ms; }
-  [data-reveal-delay="2"] { --reveal-delay: 160ms; }
+  [data-reveal-delay="1"], [data-reveal="1"] { --reveal-delay: 110ms; }
+  [data-reveal-delay="2"] { --reveal-delay: 220ms; }
 
   [data-reveal-state="pending"]:not([data-reveal="image"]) {
     opacity: 0;
@@ -223,19 +223,19 @@
   }
 
   [data-reveal-state="visible"]:not([data-reveal="image"]) {
-    animation: scroll-reveal-rise 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
+    animation: scroll-reveal-rise 950ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
   }
 
   [data-reveal="image"][data-reveal-state="pending"],
-  [data-reveal-state="pending"] [data-reveal-image] { scale: 1.035; }
+  [data-reveal-state="pending"] [data-reveal-image] { scale: 1.06; }
 
   [data-reveal="image"][data-reveal-state="visible"],
   [data-reveal-state="visible"] [data-reveal-image] {
-    animation: scroll-reveal-settle 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
+    animation: scroll-reveal-settle 950ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay) backwards;
   }
 
   @media (max-width: 767px) {
-    [data-reveal] { --reveal-rise: 24px; --reveal-delay: 0ms; }
+    [data-reveal] { --reveal-rise: 38px; --reveal-delay: 0ms; }
   }
 }
 
@@ -246,7 +246,7 @@
 
 /* Independent scale preserves the approved image hover transforms. */
 @keyframes scroll-reveal-settle {
-  from { scale: 1.035; }
+  from { scale: 1.06; }
   to { scale: 1; }
 }
 
